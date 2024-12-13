@@ -39,4 +39,13 @@ public class UserResponseDto {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "UserResponseDto{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", birthDate=" + birthDate +
+                '}';
+    }
 }
