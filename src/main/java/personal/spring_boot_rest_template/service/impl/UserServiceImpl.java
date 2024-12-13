@@ -1,5 +1,6 @@
 package personal.spring_boot_rest_template.service.impl;
 
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserResponseDto createOne(CreateUserRequestDto requestDto) throws SqlException {
         try {
             UserEntity userEntity = new UserEntity(requestDto.getUserName(), requestDto.getBirthDate());
@@ -58,6 +60,19 @@ public class UserServiceImpl implements UserService {
             return this.modelMapper.map(userEntity, UserResponseDto.class);
         } catch (Exception e) {
             throw new SqlException(e);
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteById(Integer id) throws SqlException, UserException {
+        try {
+            this.userRepository
+                    .findById(id)
+                    .orElseThrow(() -> new UserException(UserErrorCode.NOT_FOUND));
+            this.userRepository.deleteById(id);
+        } catch (Exception ex){
+            throw new SqlException(ex);
         }
     }
 

@@ -38,4 +38,9 @@ public class UserController {
         logger.info("personal.spring_boot_rest_template.controller.createUser(): {}", userResponseDto.toString());
         return ResponseEntity.created(URI.create(String.format("/users/%s", userResponseDto.getUserId()))).build();
     }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable Integer id) {
+        userService.deleteById(id);
+    }
 }

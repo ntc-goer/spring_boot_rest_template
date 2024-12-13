@@ -13,4 +13,6 @@ public interface UserService {
     UserResponseDto findById(Integer id) throws SqlException, UserException;
 
     UserResponseDto createOne(CreateUserRequestDto requestDto) throws SqlException;
+
+    void deleteById(Integer id) throws SqlException, UserException;
 }
