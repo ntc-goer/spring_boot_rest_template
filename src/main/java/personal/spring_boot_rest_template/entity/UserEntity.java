@@ -1,9 +1,14 @@
 package personal.spring_boot_rest_template.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -18,40 +23,8 @@ public class UserEntity {
     @Column(name = "birthDate")
     private LocalDateTime birthDate;
 
-    public UserEntity() {}
-
-    public UserEntity(String userName, Integer id, LocalDateTime birthDate) {
-        this.userName = userName;
-        this.id = id;
-        this.birthDate = birthDate;
-    }
-
     public UserEntity(String userName, LocalDateTime birthDate) {
         this.userName = userName;
         this.birthDate = birthDate;
-    }
-
-    public LocalDateTime getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDateTime birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 }

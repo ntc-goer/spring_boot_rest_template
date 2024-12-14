@@ -1,51 +1,23 @@
 package personal.spring_boot_rest_template.responsedto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+
 import java.time.LocalDateTime;
 
+//@JsonIgnoreProperties({"userId", "birthDate"})
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class UserResponseDto {
-    private Integer userId;
+    @JsonProperty("userId")
+    private Integer id;
+    @JsonProperty("userName")
     private String userName;
+    @JsonProperty("birthDate")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDateTime birthDate;
-
-    public UserResponseDto() {
-    }
-
-    public UserResponseDto(Integer userId, String userName, LocalDateTime birthDate) {
-        this.userId = userId;
-        this.userName = userName;
-        this.birthDate = birthDate;
-    }
-
-    public LocalDateTime getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDateTime birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public String toString() {
-        return "UserResponseDto{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", birthDate=" + birthDate +
-                '}';
-    }
 }

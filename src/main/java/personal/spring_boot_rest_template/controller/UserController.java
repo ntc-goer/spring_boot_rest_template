@@ -36,7 +36,7 @@ public class UserController {
     public ResponseEntity<UserResponseDto> createUser(@Validated @RequestBody CreateUserRequestDto body) {
         UserResponseDto userResponseDto = userService.createOne(body);
         logger.info("personal.spring_boot_rest_template.controller.createUser(): {}", userResponseDto.toString());
-        return ResponseEntity.created(URI.create(String.format("/users/%s", userResponseDto.getUserId()))).build();
+        return ResponseEntity.created(URI.create(String.format("/users/%s", userResponseDto.getId()))).build();
     }
 
     @DeleteMapping("/users/{id}")

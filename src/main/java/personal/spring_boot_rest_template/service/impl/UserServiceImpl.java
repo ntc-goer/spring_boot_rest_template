@@ -29,9 +29,6 @@ public class UserServiceImpl implements UserService {
     public List<UserResponseDto> findAll() throws SqlException {
         try {
             List<UserEntity> items = this.userRepository.findAll();
-            this.modelMapper.typeMap(UserEntity.class, UserResponseDto.class).addMapping(
-                    UserEntity::getId, UserResponseDto::setUserId
-            );
             return this.modelMapper.map(items, new TypeToken<List<UserResponseDto>>() {
             }.getType());
         } catch (Exception ex) {
