@@ -2,10 +2,13 @@ package personal.spring_boot_rest_template.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import personal.spring_boot_rest_template.requestdto.CreatePostRequestDto;
 import personal.spring_boot_rest_template.requestdto.CreateUserRequestDto;
+import personal.spring_boot_rest_template.responsedto.PostResponseDto;
 import personal.spring_boot_rest_template.responsedto.UserResponseDto;
 import personal.spring_boot_rest_template.service.UserService;
 
@@ -42,5 +45,16 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Integer id) {
         userService.deleteById(id);
+    }
+
+    @GetMapping("/users/{id}/posts")
+    public List<PostResponseDto> getPosts(@PathVariable Integer id) {
+        return userService.findAllPostByUserId(id);
+    }
+
+    @PostMapping("/users/{id}/posts")
+    public ResponseEntity<PostResponseDto> createPost(@PathVariable Integer id, @Validated @RequestBody CreatePostRequestDto body){
+        PostResponseDto responseDto =  userService.createPost(id, body);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 }

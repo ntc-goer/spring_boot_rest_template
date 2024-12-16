@@ -1,14 +1,16 @@
 package personal.spring_boot_rest_template.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -22,6 +24,9 @@ public class UserEntity {
 
     @Column(name = "birthDate")
     private LocalDateTime birthDate;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PostEntity> posts;
 
     public UserEntity(String userName, LocalDateTime birthDate) {
         this.userName = userName;
